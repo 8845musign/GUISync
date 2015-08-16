@@ -1,0 +1,3 @@
+# GUI Sync
+
+BrowserSyncのGUIフロントエンド
