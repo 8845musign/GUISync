@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "dest/"
+  },
+  "files": [
+        "./src/ts/App.ts",
+
+        "./src/ts/lib/modules/services/BrowserSyncService.ts",
+        "./src/ts/lib/modules/services/ConsoleService.ts",
+        "./src/ts/lib/modules/services/SettingFileService.ts",
+        
+        "./src/ts/lib/modules/models/SettingModel.ts"
+  ]
+}
