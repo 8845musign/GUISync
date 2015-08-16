@@ -2,14 +2,15 @@
   "name": "check_site",
   "version": "0.0.1",
   "description": "Wrapper BrowserSyc",
-  "main": "dest/main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
+  "main": "build/main.js",
+  "author": "8845musign",
+  "license": "MIT",
   "devDependencies": {
-    "electron-debug": "^0.1.1",
-    "electron-prebuilt": "^0.30.1"
+    "electron-prebuilt": "^0.30.1",
+    "gulp": "^3.9.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-typescript": "^2.8.0"
   }
 }
