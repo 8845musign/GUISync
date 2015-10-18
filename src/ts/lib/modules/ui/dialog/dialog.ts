@@ -1,5 +1,5 @@
 /// <reference path="../../../../../../typings/github-electron/github-electron-renderer.d.ts" />;
-export class Dialog {
+class Dialog {
   private overlayEl:HTMLElement;
 
   constructor() {
@@ -64,7 +64,7 @@ export class Dialog {
     return el;
   }
 }
-exports = Dialog;
+export = Dialog;
 
 module DialogConst{
     export const OVERLAY_CLASS      = "dialog__overlay";

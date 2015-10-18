@@ -1,4 +1,4 @@
-export class ConsoleService {
+class ConsoleService {
   private el:HTMLTextAreaElement;
 
   constructor(selector:string) {
@@ -9,4 +9,4 @@ export class ConsoleService {
     return this.el.innerText = this.el.innerText + log; 
   }
 }
-exports = ConsoleService;
+export = ConsoleService;

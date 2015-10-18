@@ -2,7 +2,7 @@
 
 import fs = require('fs');
 
-export class SettingFileService {
+class SettingFileService {
   private SETTING_FILE_PATH : string = "./bs-config.js"; 
   constructor() {}
   
@@ -12,4 +12,4 @@ export class SettingFileService {
     return fs.writeFile('bs-config.js', content);
   }
 }
-exports = SettingFileService;
+export = SettingFileService;

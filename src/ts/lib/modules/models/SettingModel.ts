@@ -1,4 +1,4 @@
-export class SettingModel {
+class SettingModel {
   private target :string;
   private basicId :string;
   private basicPassword :string;
@@ -42,4 +42,4 @@ module.exports = {
     }
   }
 }
-exports = SettingModel;
+export = SettingModel;

@@ -1,29 +1,29 @@
 /// <reference path="../../typings/github-electron/github-electron-renderer.d.ts" />;
 /// <reference path="../../typings/bluebird/bluebird.d.ts" />;
 
-import browserSyncService = require('./lib/modules/services/BrowserSyncService');
-import settingModel       = require('./lib/modules/models/SettingModel');
-import consoleService     = require('./lib/modules/services/consoleService');
-import settingFileService = require('./lib/modules/services/SettingFileService');
-import dialog             = require('./lib/modules/ui/dialog/dialog');
+import BrowserSyncService = require('./lib/modules/services/BrowserSyncService');
+import SettingModel       = require('./lib/modules/models/SettingModel');
+import ConsoleService     = require('./lib/modules/services/consoleService');
+import SettingFileService = require('./lib/modules/services/SettingFileService');
+import Dialog             = require('./lib/modules/ui/dialog/dialog');
 import Loading            = require('./lib/modules/ui/loading/Loading');
 
 class App {
   private btnStart:HTMLButtonElement;
   private btnInstall:HTMLButtonElement;
   private btnStop:HTMLButtonElement;
-  private console:consoleService.ConsoleService;
-  private browserSync:browserSyncService.BrowserSyncService;
+  private console:ConsoleService;
+  private browserSync:BrowserSyncService;
   
   constructor() {
-    this.browserSync = new browserSyncService.BrowserSyncService();
+    this.browserSync = new BrowserSyncService();
   }
 
   public start() : void {
     this.btnStart   = <HTMLButtonElement>document.getElementById('btnStart');
     this.btnInstall = <HTMLButtonElement>document.getElementById('btnModuleInstall');
     this.btnStop    = <HTMLButtonElement>document.getElementById('btnStop');
-    this.console    = new consoleService.ConsoleService('#windowConsole');
+    this.console    = new ConsoleService('#windowConsole');
 
     this.bind();
     this.checkBrowserSync();
@@ -36,16 +36,16 @@ class App {
   }
   
   public checkBrowserSync() {
-    browserSyncService.BrowserSyncService.isInstelled().then(function(){
+    BrowserSyncService.isInstelled().then(function(){
       // nothing
     }).catch(function(){
-      dialog.Dialog.normal({
+      Dialog.normal({
         text: "BrowserSyncをインストールします",
         buttonText: "OK",
         callback: function() {
-          var install = browserSyncService.BrowserSyncService.install();
+          var install = BrowserSyncService.install();
           install.on('install', function(){
-            dialog.Dialog.normal({ text:'インストール完了しました', buttonText:'OK' });
+            Dialog.normal({ text:'インストール完了しました', buttonText:'OK' });
           });
         }
       });
@@ -74,7 +74,7 @@ class App {
   }
   
   private onClickInstallBtn(e:Event) : void {
-    var install = browserSyncService.BrowserSyncService.install();
+    var install = BrowserSyncService.install();
 
     install.on('install', function(data){
       this.console.log(data);
@@ -100,12 +100,12 @@ class App {
     var pass : string = (<HTMLInputElement>document.getElementById('authPass')).value;
     var proxyTarget : string = (<HTMLInputElement>document.getElementById('proxyTarget')).value;
 
-    var setting = new settingModel.SettingModel({
+    var setting = new SettingModel({
       target: proxyTarget, 
       basicId:user, 
       basicPassword: pass
     });
 
-    settingFileService.SettingFileService.create(setting);
+    SettingFileService.create(setting);
   }
 }

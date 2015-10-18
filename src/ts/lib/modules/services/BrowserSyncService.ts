@@ -7,7 +7,7 @@ import EventEmitter = Events.EventEmitter;
 import Promise = require('bluebird');
 var spawn   = require('child_process').spawn;
 
-export class BrowserSyncService {
+class BrowserSyncService {
   private currentDir:string;
   private app:Array<string>;
   private pid:Number;
@@ -95,7 +95,7 @@ export class BrowserSyncService {
     
   }
 }
-exports = BrowserSyncService;
+export = BrowserSyncService;
 
 module Const {
     export const PATH_TO_BROWSER_SYNC = __dirname + "/../../../node_modules/browser-sync/bin/browser-sync.js";
