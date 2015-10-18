@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.4rem;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: 'NotoSansCJKjp';
+  color: #333;
+  line-height: 1.5;
+}
+
+textarea,
+input {
+  font-size: 1.4rem;
+}
+
+label {
+  cursor: pointer;
+}
+
+.cf:before,
+.cf:after {
+content: ".";
+display: block;
+height: 0;
+overflow: hidden;
+}
+.cf:after {clear: both;}

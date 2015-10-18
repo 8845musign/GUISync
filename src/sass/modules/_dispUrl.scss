@@ -1,0 +1,18 @@
+.dispUrl {
+  padding: 44px 0 30px;
+  text-align: center;
+}
+
+.dispUrl__icon {
+ color: $mainColor;
+ font-size: 2.8rem;
+ margin-right: .7rem;
+}
+
+.dispUrl__text {
+  display: inline-block;
+  font-size: 2.4rem;
+  font-weight: 100;
+  min-width: 150px;
+  text-align: left;
+}

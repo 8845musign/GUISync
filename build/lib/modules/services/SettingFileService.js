@@ -1,0 +1,16 @@
+/// <reference path="../../../../../typings/github-electron/github-electron-renderer.d.ts" />;
+var fs = require('fs');
+var SettingFileService = (function () {
+    function SettingFileService() {
+        this.SETTING_FILE_PATH = "./bs-config.js";
+    }
+    SettingFileService.create = function (model) {
+        var content = model.getSettingString();
+        return fs.writeFile('bs-config.js', content);
+    };
+    return SettingFileService;
+})();
+exports.SettingFileService = SettingFileService;
+exports = SettingFileService;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpYi9tb2R1bGVzL3NlcnZpY2VzL1NldHRpbmdGaWxlU2VydmljZS50cyJdLCJuYW1lcyI6WyJTZXR0aW5nRmlsZVNlcnZpY2UiLCJTZXR0aW5nRmlsZVNlcnZpY2UuY29uc3RydWN0b3IiLCJTZXR0aW5nRmlsZVNlcnZpY2UuY3JlYXRlIl0sIm1hcHBpbmdzIjoiQUFBQSw4RkFBOEY7QUFFOUYsSUFBTyxFQUFFLFdBQVcsSUFBSSxDQUFDLENBQUM7QUFFMUI7SUFFRUE7UUFEUUMsc0JBQWlCQSxHQUFZQSxnQkFBZ0JBLENBQUNBO0lBQ3ZDQSxDQUFDQTtJQUVGRCx5QkFBTUEsR0FBcEJBLFVBQXNCQSxLQUFLQTtRQUN6QkUsSUFBSUEsT0FBT0EsR0FBV0EsS0FBS0EsQ0FBQ0EsZ0JBQWdCQSxFQUFFQSxDQUFDQTtRQUUvQ0EsTUFBTUEsQ0FBQ0EsRUFBRUEsQ0FBQ0EsU0FBU0EsQ0FBQ0EsY0FBY0EsRUFBRUEsT0FBT0EsQ0FBQ0EsQ0FBQ0E7SUFDL0NBLENBQUNBO0lBQ0hGLHlCQUFDQTtBQUFEQSxDQVRBLEFBU0NBLElBQUE7QUFUWSwwQkFBa0IscUJBUzlCLENBQUE7QUFDRCxPQUFPLEdBQUcsa0JBQWtCLENBQUMiLCJmaWxlIjoibGliL21vZHVsZXMvc2VydmljZXMvU2V0dGluZ0ZpbGVTZXJ2aWNlLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8vIDxyZWZlcmVuY2UgcGF0aD1cIi4uLy4uLy4uLy4uLy4uL3R5cGluZ3MvZ2l0aHViLWVsZWN0cm9uL2dpdGh1Yi1lbGVjdHJvbi1yZW5kZXJlci5kLnRzXCIgLz47XG5cbmltcG9ydCBmcyA9IHJlcXVpcmUoJ2ZzJyk7XG5cbmV4cG9ydCBjbGFzcyBTZXR0aW5nRmlsZVNlcnZpY2Uge1xuICBwcml2YXRlIFNFVFRJTkdfRklMRV9QQVRIIDogc3RyaW5nID0gXCIuL2JzLWNvbmZpZy5qc1wiOyBcbiAgY29uc3RydWN0b3IoKSB7fVxuICBcbiAgcHVibGljIHN0YXRpYyBjcmVhdGUgKG1vZGVsKSB7XG4gICAgdmFyIGNvbnRlbnQ6IHN0cmluZyA9IG1vZGVsLmdldFNldHRpbmdTdHJpbmcoKTtcbiAgICBcbiAgICByZXR1cm4gZnMud3JpdGVGaWxlKCdicy1jb25maWcuanMnLCBjb250ZW50KTtcbiAgfVxufVxuZXhwb3J0cyA9IFNldHRpbmdGaWxlU2VydmljZTsiXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=

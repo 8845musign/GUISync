@@ -1,0 +1,49 @@
+.btn {
+  padding: .5rem 1rem;
+  height: 3rem;
+  background-color: $mainColor;
+  border: none;
+  border-radius: 3px;
+  border-bottom: 2px solid darken($mainColor, 10%);
+  color: #FFF;
+
+  &:hover {
+    background-color: lighten($mainColor, 2%);
+  }
+  
+  &:active {
+  background-color: $mainColor;
+  border-bottom: none;
+  }
+}
+
+.btnRun {
+  position: absolute;
+  display: block;
+  width: 88px;
+  height: 88px;
+  bottom: -44px;
+  left: 50%;
+  margin: 0 0 0 -44px;
+  padding-left: 11px;
+  border-radius: 50%;
+  border: none;
+  background-color: $subColor;
+  color: #FFF;
+  font-size: 3.7rem;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow ease 0.2s;
+  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.40);
+  will-change: box-shadow;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.40);
+  }
+  
+  &:active {
+    background-color: darken($subColor, 5%);
+    box-shadow: none;
+ }
+}

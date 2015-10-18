@@ -1,52 +1,102 @@
 /// <reference path="../../../../../typings/github-electron/github-electron-renderer.d.ts" />;
+/// <reference path="../../../../../typings/bluebird/bluebird.d.ts" />;
 
 import remote = require('remote');
-var spawn = require('child_process').spawn;
+import Events = require('events');
+import EventEmitter = Events.EventEmitter;
+import Promise = require('bluebird');
+var spawn   = require('child_process').spawn;
 
 export class BrowserSyncService {
   private currentDir:string;
   private app:Array<string>;
   private pid:Number;
+  private child:any; // cli child process
 
   constructor() {
     this.currentDir = __dirname;
     this.app = [];
-    this.app.push(__dirname + "/../../../node_modules/browser-sync/bin/browser-sync.js");
+    this.app.push(Const.PATH_TO_BROWSER_SYNC);
     this.app.push('start')
     this.app.push("--config");
-    this.app.push( __dirname + "/../../../bs-config.js");
+    this.app.push( __dirname + "/../../../../bs-config.js");
 
-    this.pid        = null;
+    this.child = null;
     
     return this;
   }
-
-  public start() {
-    if (this.pid !== null) {
-      throw new Error('BrowserSync has been already started.');
-    }
-    var start = spawn('node', this.app, { cwd: __dirname });
-    this.pid = spawn.pid;
-
-    start.stdout.on('data', function(data){
-      console.log('stdout: ' + data);
-    });
-
-    start.stderr.on('data', function(data){
-      console.log('stderr: ' + data);
-    });
+  
+  public isRunning() : boolean {
+    return (this.child) ? true : false;
   }
 
-  public install() {
+  public start() : EventEmitter {
+    if (this.child !== null) {
+      throw new Error('BrowserSync has been already started.');
+    }
+
+    this.child = spawn('node', this.app, { cwd: __dirname });
+    this.pid = spawn.pid;
+
+    var event = new EventEmitter();
+
+    this.child.stdout.on('data', function(data){
+      console.log('stdout: ' + data);
+      event.emit('start', data);
+    });
+
+    this.child.stderr.on('data', function(data){
+      console.log('stderr: ' + data);
+      event.emit('error', data);
+    });
+    
+    return event;
+  }
+
+  public stop() : void {
+   this.child.kill();
+   this.child = null;
+  }
+
+  public static install() : EventEmitter {
     var install = spawn('npm', ['install'], { cwd: __dirname });
+    var event = new EventEmitter();
 
     install.stdout.on('data', function(data){
       console.log('stdout: ' + data);
+      event.emit('install', data);
     });
 
     install.stderr.on('data', function(data){
       console.log('stderr: ' + data);
+      event.emit('error', data);
     });
+
+    return event;
+  }
+  
+  public static isInstelled() :Promise<any> {
+
+    return new Promise(function(resolve, reject){
+      var version = spawn([Const.PATH_TO_BROWSER_SYNC, '--version']);
+
+      version.stdout.on('data', function(data){
+        resolve(data);
+      });
+
+      version.stderr.on('data', function(data){
+        reject(data);
+      });
+  
+      version.on('error', function(data){
+        reject(data);
+      });
+    });
+    
   }
 }
 exports = BrowserSyncService;
+
+module Const {
+    export const PATH_TO_BROWSER_SYNC = __dirname + "/../../../node_modules/browser-sync/bin/browser-sync.js";
+}

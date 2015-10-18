@@ -12,5 +12,8 @@
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-typescript": "^2.8.0"
+  },
+  "dependencies": {
+    "bluebird": "^2.10.2"
   }
 }

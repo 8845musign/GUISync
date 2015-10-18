@@ -1,31 +1,17 @@
-body,
-html {
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
-  line-height: 1.5;
-}
+@import "./modules/variables";
+@import "./modules/font";
+@import "./modules/foundation";
+@import "./modules/layer";
+@import "./modules/btn";
+@import "./modules/input";
+@import "./modules/dispUrl";
+@import "./modules/console";
+@import "./modules/dialog";
 
-textarea {
-  width: 100%;
-  box-sizing: border-box;
-  background-color: #333;
-  color: #FFF;
-  height: 6rem;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: .5rem;
+.settingSection {
+  padding: 21px;
 }
 
 [disabled] input {
   opacity: .5;
-}
-
-[disabled] input[type=checkbox] {
-  opacity: 1;
-}
-
-.settingSection {
-  padding: 21px;
 }
