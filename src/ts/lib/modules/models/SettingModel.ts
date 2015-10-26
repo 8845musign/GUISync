@@ -18,7 +18,7 @@ class SettingModel {
 
     return btoa(this.basicId + ":" + this.basicPassword);
   }
-  
+
   public getSettingString():string {
 
     if (this.isAuthDisabled === true) {

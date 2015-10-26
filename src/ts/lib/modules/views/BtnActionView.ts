@@ -1,5 +1,8 @@
 /// <reference path="../../../../../typings/github-electron/github-electron-renderer.d.ts" />;
-var EventEmitter = require('events').EventEmitter;
+/// <reference path="../../../../../typings/node/node.d.ts" />;
+
+import events = require('events');
+var EventEmitter = events.EventEmitter
 
 class BtnActionView extends EventEmitter {
     private el:HTMLElement;
@@ -60,7 +63,7 @@ class BtnActionView extends EventEmitter {
         this.el.classList.add(Const.CSS_CLASS_START);
     }
 }
-export = ActionBtn;
+export = BtnActionView;
 
 /**
  * Button Mode

@@ -1,4 +1,4 @@
 
 module.exports = {
-    proxy: { target: "" }
+    proxy: { target: "http://" }
 };

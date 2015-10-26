@@ -11,7 +11,8 @@ import Dialog             = require('./lib/modules/ui/dialog/dialog');
 import Loading            = require('./lib/modules/ui/loading/Loading');
 
 //View
-import BtnActionView = require('./lib/modules/views/BtnActionView');
+import BtnActionView  = require('./lib/modules/views/BtnActionView');
+import UrlDisplayView = require('./lib/modules/views/UrlDisplayView');
 
 class App {
   private btnStart:HTMLButtonElement;
@@ -19,32 +20,43 @@ class App {
   private btnStop:HTMLButtonElement;
   private console:ConsoleService;
   private browserSync:BrowserSyncService;
+  private urlDisplayView:UrlDisplayView;
   
   constructor() {
     this.browserSync = new BrowserSyncService();
   }
 
   public start() : void {
+    this.urlDisplayView = new UrlDisplayView('.dispUrl__text');
     var btnActionView = new BtnActionView({
-      el:'#btnRun',
+      selector:'#btnRun',
       startFunc: function(event) {
-        if (this.browserSync.isRunning() === true) return;
+        if (this.browserSync.isRunning()) return;
         this.createSettingFile();
   
         var start = this.browserSync.start();
 
         start.on('start', function(data){
           this.console.log(data);
+          var url = this.browserSync.getUrlFromStdout(data);
+          this.urlDisplayView.setUrl(url);
+          this.console.log(data);
+
+          event.emit('started');
         });
   
         start.on('error', function(data){
           this.console.log(data);
+          this.urlDisplayView.clearUrl();
+          this.console.log(data);
+
+          event.emit('started');
         });
-  
-        event.emit('started');
       }.bind(this),
       stopFunc: function(event){
         this.browserSync.stop();
+        this.urlDisplayView.clearUrl();
+
         event.emit('stoped');
       }.bind(this),
     });

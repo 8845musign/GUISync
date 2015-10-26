@@ -12,6 +12,7 @@ class BrowserSyncService {
   private app:Array<string>;
   private pid:Number;
   private child:any; // cli child process
+  private env:Object;
 
   constructor() {
     this.currentDir = __dirname;
@@ -19,7 +20,10 @@ class BrowserSyncService {
     this.app.push(Const.PATH_TO_BROWSER_SYNC);
     this.app.push('start')
     this.app.push("--config");
-    this.app.push( __dirname + "/../../../../bs-config.js");
+    this.app.push(__dirname + "/../../../../bs-config.js");
+    this.env = Object.create( process.env );
+
+    console.log(__dirname + "/../../../node_modules/browser-sync/bin/browser-sync.js");
 
     this.child = null;
     
@@ -59,18 +63,22 @@ class BrowserSyncService {
   }
 
   public static install() : EventEmitter {
-    var install = spawn('npm', ['install'], { cwd: __dirname });
+    console.log("dir", __dirname);
+    var install = spawn('npm', ['install', '--save-dev', 'browser-sync'], { cwd: __dirname });
     var event = new EventEmitter();
 
     install.stdout.on('data', function(data){
       console.log('stdout: ' + data);
-      event.emit('install', data);
     });
 
     install.stderr.on('data', function(data){
       console.log('stderr: ' + data);
-      event.emit('error', data);
     });
+
+    install.on('error', function(data){
+      console.log('error: ' + data);
+    });
+
 
     return event;
   }
@@ -93,6 +101,16 @@ class BrowserSyncService {
       });
     });
     
+  }
+  
+  public static getUrlFromStdout(stdOut:string) :string {
+    var reg = new RegExp('https?://[\w/:%#\$&\?\(\)~\.=\+\-]+');
+    var matches = stdOut.match(reg);
+
+    if (matches[0]) {
+      return matches[0];
+    }
+    return '';
   }
 }
 export = BrowserSyncService;
