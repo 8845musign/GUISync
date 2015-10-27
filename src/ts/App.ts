@@ -73,10 +73,11 @@ class App {
         text: "BrowserSyncをインストールします",
         buttonText: "OK",
         callback: function() {
-          var install = BrowserSyncService.install();
-          install.on('install', function(){
-            Dialog.normal({ text:'インストール完了しました', buttonText:'OK' });
-          });
+          BrowserSyncService
+            .install()
+            .then(function(){
+              Dialog.normal({ text:'インストール完了しました', buttonText:'OK' });
+            }, function() {});
         }
       });
     });

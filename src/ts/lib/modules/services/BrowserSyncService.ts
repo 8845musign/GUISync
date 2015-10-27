@@ -62,25 +62,29 @@ class BrowserSyncService {
    this.child = null;
   }
 
-  public static install() : EventEmitter {
+  public static install() : Promise<any> {
     console.log("dir", __dirname);
     var install = spawn('npm', ['install', '--save-dev', 'browser-sync'], { cwd: __dirname });
     var event = new EventEmitter();
 
-    install.stdout.on('data', function(data){
-      console.log('stdout: ' + data);
+    return new Promise(function(resolve, reject){
+      install.stdout.on('data', function(data){
+        console.log('stdout: ' + data);
+      });
+  
+      install.stderr.on('data', function(data){
+        console.log('stderr: ' + data);
+      });
+  
+      install.on('error', function(data){
+        console.log('error: ' + data);
+      });
+  
+      install.on('exit', function(data){
+        resolve(data);
+      });
     });
 
-    install.stderr.on('data', function(data){
-      console.log('stderr: ' + data);
-    });
-
-    install.on('error', function(data){
-      console.log('error: ' + data);
-    });
-
-
-    return event;
   }
   
   public static isInstelled() :Promise<any> {
