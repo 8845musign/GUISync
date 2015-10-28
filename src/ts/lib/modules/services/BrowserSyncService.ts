@@ -23,8 +23,6 @@ class BrowserSyncService {
     this.app.push(__dirname + "/../../../../bs-config.js");
     this.env = Object.create( process.env );
 
-    console.log(__dirname + "/../../../node_modules/browser-sync/bin/browser-sync.js");
-
     this.child = null;
     
     return this;
@@ -63,7 +61,6 @@ class BrowserSyncService {
   }
 
   public static install() : Promise<any> {
-    console.log("dir", __dirname);
     var install = spawn('npm', ['install', '--save-dev', 'browser-sync'], { cwd: __dirname });
     var event = new EventEmitter();
 
@@ -84,23 +81,23 @@ class BrowserSyncService {
         resolve(data);
       });
     });
-
+ 
   }
   
   public static isInstelled() :Promise<any> {
 
     return new Promise(function(resolve, reject){
-      var version = spawn([Const.PATH_TO_BROWSER_SYNC, '--version']);
+
+      console.log(spawn);
+      var version = spawn(Const.PATH_TO_BROWSER_SYNC, ['--version']);
 
       version.stdout.on('data', function(data){
+        console.log("stdout:" + data);
         resolve(data);
       });
 
       version.stderr.on('data', function(data){
-        reject(data);
-      });
-  
-      version.on('error', function(data){
+        console.log("stdout:" + data);
         reject(data);
       });
     });
