@@ -6,6 +6,7 @@ import BrowserSyncService = require('./lib/modules/services/BrowserSyncService')
 import SettingModel       = require('./lib/modules/models/SettingModel');
 import ConsoleService     = require('./lib/modules/services/consoleService');
 import SettingFileService = require('./lib/modules/services/SettingFileService');
+
 // UI
 import Dialog             = require('./lib/modules/ui/dialog/dialog');
 import Loading            = require('./lib/modules/ui/loading/Loading');
