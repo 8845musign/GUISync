@@ -38,18 +38,14 @@ class App {
         var start = this.browserSync.start();
 
         start.on('start', function(data){
-          this.console.log(data);
           var url = this.browserSync.getUrlFromStdout(data);
           this.urlDisplayView.setUrl(url);
-          this.console.log(data);
 
           event.emit('started');
         });
   
         start.on('error', function(data){
-          this.console.log(data);
           this.urlDisplayView.clearUrl();
-          this.console.log(data);
 
           event.emit('started');
         });
