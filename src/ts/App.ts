@@ -25,7 +25,7 @@ class App {
   
   constructor() {
     this.browserSync = new BrowserSyncService();
-    this.console = new ConsoleService('#console');
+    this.console = new ConsoleService('#windowConsole');
   }
 
   public start() : void {
@@ -40,6 +40,7 @@ class App {
 
         start.on('start', function(data){
           var str = String.fromCharCode.apply(null, data);
+          this.console.log(data);
           if (str.indexOf('External') < 0 || str.indexOf('UI') > -1) return;
 
           var url = BrowserSyncService.getUrlFromStdout(str);
@@ -49,6 +50,7 @@ class App {
         }.bind(this));
   
         start.on('error', function(data){
+          this.console.log("" + data);
           this.urlDisplayView.clearUrl();
 
           event.emit('started');
@@ -61,7 +63,6 @@ class App {
         event.emit('stoped');
       }.bind(this),
     });
-    this.console    = new ConsoleService('#windowConsole');
 
     this.checkBrowserSync();
   }
