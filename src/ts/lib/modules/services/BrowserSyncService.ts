@@ -40,17 +40,13 @@ class BrowserSyncService {
     this.child = spawn('node', this.app, { cwd: __dirname });
     this.pid = this.child.pid;
 
-    console.log("pid:" + this.pid);
-
     var event = new EventEmitter();
 
     this.child.stdout.on('data', function(data){
-      console.log('stdout: ' + data);
       event.emit('start', data);
     });
 
     this.child.stderr.on('data', function(data){
-      console.log('stderr: ' + data);
       event.emit('error', data);
     });
     
