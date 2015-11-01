@@ -24,7 +24,7 @@ class BrowserSyncService {
     this.env = Object.create( process.env );
 
     this.child = null;
-    
+
     return this;
   }
   
@@ -38,7 +38,9 @@ class BrowserSyncService {
     }
 
     this.child = spawn('node', this.app, { cwd: __dirname });
-    this.pid = spawn.pid;
+    this.pid = this.child.pid;
+
+    console.log("pid:" + this.pid);
 
     var event = new EventEmitter();
 
@@ -88,8 +90,9 @@ class BrowserSyncService {
 
     return new Promise(function(resolve, reject){
 
-      console.log(spawn);
+      console.log("here");
       var version = spawn(Const.PATH_TO_BROWSER_SYNC, ['--version']);
+      console.log("here2");
 
       version.stdout.on('data', function(data){
         console.log("stdout:" + data);
@@ -100,8 +103,13 @@ class BrowserSyncService {
         console.log("stdout:" + data);
         reject(data);
       });
+      
+      version.on('error', function(data){
+        console.log('error:' + data);
+        reject(data);
+      });
     });
-    
+
   }
   
   public static getUrlFromStdout(stdOut:string) :string {

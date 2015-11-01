@@ -36,6 +36,7 @@ class BtnActionView extends EventEmitter {
      * on click
      */
     private onClick(e:Event):void {
+        console.log(this.mode);
         if (this.mode === Mode.start) {
             this.start();
         } else {
@@ -52,6 +53,7 @@ class BtnActionView extends EventEmitter {
         this.startFunc(this);
         this.el.classList.remove(Const.CSS_CLASS_START);
         this.el.classList.add(Const.CSS_CLASS_STOP);
+        this.mode = Mode.stop;
     }
 	
     /**
@@ -61,6 +63,7 @@ class BtnActionView extends EventEmitter {
         this.stopFunc(this);
         this.el.classList.remove(Const.CSS_CLASS_STOP);
         this.el.classList.add(Const.CSS_CLASS_START);
+        this.mode = Mode.start;
     }
 }
 export = BtnActionView;
@@ -77,6 +80,6 @@ enum Mode{
  * const
  */
 module Const {
-    export const CSS_CLASS_START    = 'btnAction--start';
-    export const CSS_CLASS_STOP     = 'btnAction--stop';
+    export const CSS_CLASS_START    = 'btnRun--start';
+    export const CSS_CLASS_STOP     = 'btnRun--stop';
 }

@@ -24,6 +24,7 @@ class App {
   
   constructor() {
     this.browserSync = new BrowserSyncService();
+    this.console = new ConsoleService('#console');
   }
 
   public start() : void {
@@ -81,14 +82,6 @@ class App {
         }
       });
     });
-  }
-    
-  private onClickStopBtn(e:Event) : void {
-    if (this.browserSync.isRunning() === false) return;
-    this.browserSync.stop();
-    this.btnStart.disabled = false;
-    
-    e.preventDefault();
   }
 
   public createSettingFile() : void {
