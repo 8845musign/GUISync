@@ -2,13 +2,11 @@ class SettingModel {
   private target :string;
   private basicId :string;
   private basicPassword :string;
-  private isAuthDisabled :boolean;
 
   constructor(options:{ target:string, basicId?:string, basicPassword?:string }) {
     this.target          = options.target;
-    this.basicId         = options.basicId;
-    this.basicPassword   = options.basicPassword;
-    this.isAuthDisabled  = true;
+    this.basicId         = options.basicId || "";
+    this.basicPassword   = options.basicPassword || "";
   }
 
   private encodedIdAndPass():string {
@@ -21,13 +19,17 @@ class SettingModel {
 
   public getSettingString():string {
 
-    if (this.isAuthDisabled === true) {
+    var hasBasicAuth = (this.basicId !== "" && this.basicPassword !== "");
+
+    if (!hasBasicAuth) {
+      // No auth
       return `
 module.exports = {
     proxy: { target: "${ this.target }" }
 };
 `;
     } else {
+      // auth
       return `
 module.exports = {
     proxy: {
