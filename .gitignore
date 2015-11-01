@@ -6,3 +6,5 @@ build/
 !build/.gitkeep
 
 *.log.*
+
+bs-config.js

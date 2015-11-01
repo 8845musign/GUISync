@@ -108,9 +108,8 @@ class BrowserSyncService {
 
   }
   
-  public static getUrlFromStdout(stdOut:string) :string {
-    var reg = new RegExp('https?://[\w/:%#\$&\?\(\)~\.=\+\-]+');
-    var matches = stdOut.match(reg);
+  public static getUrlFromStdout(str:string) :string {
+    var matches = str.match("https?://[a-zA-Z0-9\-_\.:@!~*'\(¥);/?&=\+$,%#]+");
 
     if (matches[0]) {
       return matches[0];

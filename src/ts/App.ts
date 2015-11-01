@@ -38,17 +38,20 @@ class App {
         var start = this.browserSync.start();
 
         start.on('start', function(data){
-          var url = this.browserSync.getUrlFromStdout(data);
+          var str = String.fromCharCode.apply(null, data);
+          if (str.indexOf('External') < 0 || str.indexOf('UI') > -1) return;
+
+          var url = BrowserSyncService.getUrlFromStdout(str);
           this.urlDisplayView.setUrl(url);
 
           event.emit('started');
-        });
+        }.bind(this));
   
         start.on('error', function(data){
           this.urlDisplayView.clearUrl();
 
           event.emit('started');
-        });
+        }.bind(this));
       }.bind(this),
       stopFunc: function(event){
         this.browserSync.stop();
