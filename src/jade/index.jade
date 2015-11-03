@@ -17,8 +17,10 @@ head
         input#authUser.input(type='text')
         label.input__label(for="authPass") PASSWORD
         input#authPass.input(type='text')
-      button#btnRun.btnRun
-        span.fa.fa-play
+      button#btnRun.btnAction
+        div.btnAction__iconContainer
+          span.btnAction__icon.fa.fa-play
+          span.btnAction__icon.fa.fa-stop
     div.pageUnder
       div.dispUrl
         span.dispUrl__icon.fa.fa-database

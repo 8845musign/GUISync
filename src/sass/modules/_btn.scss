@@ -10,14 +10,14 @@
   &:hover {
     background-color: lighten($mainColor, 2%);
   }
-  
+
   &:active {
   background-color: $mainColor;
   border-bottom: none;
   }
 }
 
-.btnRun {
+.btnAction {
   position: absolute;
   display: block;
   width: 88px;
@@ -25,17 +25,18 @@
   bottom: -44px;
   left: 50%;
   margin: 0 0 0 -44px;
-  padding-left: 11px;
+  padding: 0;
   border-radius: 50%;
   border: none;
   background-color: $subColor;
   color: #FFF;
-  font-size: 3.7rem;
-  text-align: center;
   cursor: pointer;
   transition: box-shadow ease 0.2s;
   box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.40);
   will-change: box-shadow;
+  overflow: hidden;
+  transition: all 500ms ease;
+  will-change: background-color;
 
   &:hover,
   &:focus {
@@ -46,8 +47,27 @@
     background-color: darken($subColor, 5%);
     box-shadow: none;
  }
+
 }
 
-.btnRun.btnRun--stop {
-  background-color: yellow;
+.btnAction__iconContainer {
+  width: 176px;
+}
+
+.btnAction__icon {
+  width: 88px;
+  font-size: 3.7rem;
+  text-align: center;
+  letter-spacing: normal;
+  transition: all 500ms ease;
+  will-change: transform;
+}
+
+
+.btnAction.btnAction--stop {
+  .fa-play,
+  .fa-stop {
+    transform: translateX(-88px);
+  }
+  background-color: $thirdColor;
 }

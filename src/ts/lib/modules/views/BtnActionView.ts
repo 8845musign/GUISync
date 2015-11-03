@@ -80,6 +80,6 @@ enum Mode{
  * const
  */
 module Const {
-    export const CSS_CLASS_START    = 'btnRun--start';
-    export const CSS_CLASS_STOP     = 'btnRun--stop';
+    export const CSS_CLASS_START    = 'btnAction--start';
+    export const CSS_CLASS_STOP     = 'btnAction--stop';
 }
