@@ -40,6 +40,7 @@ class App {
 
         start.on('start', function(data){
           var str = String.fromCharCode.apply(null, data);
+          this.console.log(str);
 
           if (str.indexOf('External') < 0 || str.indexOf('UI') > -1) return;
 
