@@ -87,9 +87,16 @@ class App {
   }
 
   public createSettingFile() : void {
+    var proxyTargetEl = <HTMLInputElement>document.getElementById('proxyTarget');
+
     var user : string = (<HTMLInputElement>document.getElementById('authUser')).value
     var pass : string = (<HTMLInputElement>document.getElementById('authPass')).value;
-    var proxyTarget : string = (<HTMLInputElement>document.getElementById('proxyTarget')).value;
+    var proxyTarget : string = proxyTargetEl.value;
+
+    if (proxyTarget.slice(-1) !== '/') {
+      proxyTarget = proxyTarget + '/';
+      proxyTargetEl.value = proxyTarget;
+    }
 
     var setting = new SettingModel({
       target: proxyTarget, 
