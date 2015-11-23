@@ -32,40 +32,37 @@ class App {
     this.urlDisplayView = new UrlDisplayView('.dispUrl__text');
     var btnActionView = new BtnActionView({
       selector:'#btnRun',
-      startFunc: function(event) {
-        if (this.browserSync.isRunning()) return;
-        this.createSettingFile();
-  
-        var start = this.browserSync.start();
-
-        start.on('start', function(data){
-          var str = String.fromCharCode.apply(null, data);
-          this.console.log(str);
-
-          if (str.indexOf('External') < 0 || str.indexOf('UI') > -1) return;
-
-          var url = BrowserSyncService.getUrlFromStdout(str);
-          this.urlDisplayView.setUrl(url);
-
-          event.emit('started');
-        }.bind(this));
-  
-        start.on('error', function(data){
-          this.console.log("" + data);
-          this.urlDisplayView.clearUrl();
-
-          event.emit('started');
-        }.bind(this));
-      }.bind(this),
-      stopFunc: function(event){
-        this.browserSync.stop();
-        this.urlDisplayView.clearUrl();
-
-        event.emit('stoped');
-      }.bind(this),
+      startFunc: this.startSync.bind(this),
+      stopFunc: this.stopSync.bind(this)
     });
 
     this.checkBrowserSync();
+  }
+  
+  // browsersync start function
+  private startSync(): void {
+    if (this.browserSync.isRunning()) return;
+    this.createSettingFile();
+
+    var start = this.browserSync.start();
+
+    start.on('start', function(data){
+      var str = String.fromCharCode.apply(null, data);
+      this.console.log(str);
+      if (str.indexOf('External') < 0 || str.indexOf('UI') > -1) return;
+      var url = BrowserSyncService.getUrlFromStdout(str);
+      this.urlDisplayView.setUrl(url);
+    }.bind(this));
+  
+    start.on('error', function(data){
+      this.console.log("" + data);
+      this.urlDisplayView.clearUrl();
+    }.bind(this));
+  }
+
+  private stopSync(): void{
+    this.browserSync.stop();
+    this.urlDisplayView.clearUrl();
   }
 
   public checkBrowserSync() {
