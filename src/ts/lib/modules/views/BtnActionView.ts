@@ -36,7 +36,6 @@ class BtnActionView extends EventEmitter {
      * on click
      */
     private onClick(e:Event):void {
-        console.log(this.mode);
         if (this.mode === Mode.start) {
             this.start();
         } else {
