@@ -101,7 +101,6 @@ class BrowserSyncService {
       });
       
       version.on('error', function(data){
-        console.log('error:' + data);
         reject(data);
       });
     });
@@ -109,7 +108,7 @@ class BrowserSyncService {
   }
   
   public static getUrlFromStdout(str:string) :string {
-    var matches = str.match("https?://[a-zA-Z0-9\-_\.:@!~*'\(¥);/?&=\+$,%#]+");
+    var matches = str.match(new RegExp("External.*(https?://[a-zA-Z0-9\-_\.:@!~*'\(¥);/?&=\+$,%#]+)", "g"));
 
     if (matches[0]) {
       return matches[0];
