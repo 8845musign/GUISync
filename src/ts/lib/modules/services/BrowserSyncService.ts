@@ -85,18 +85,13 @@ class BrowserSyncService {
   public static isInstelled() :Promise<any> {
 
     return new Promise(function(resolve, reject){
-
-      console.log("here");
       var version = spawn(Const.PATH_TO_BROWSER_SYNC, ['--version']);
-      console.log("here2");
 
       version.stdout.on('data', function(data){
-        console.log("stdout:" + data);
         resolve(data);
       });
 
       version.stderr.on('data', function(data){
-        console.log("stdout:" + data);
         reject(data);
       });
       
